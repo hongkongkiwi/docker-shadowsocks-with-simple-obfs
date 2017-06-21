@@ -2,7 +2,7 @@
 
 ### example
 
-docker run -it --rm hitian/docker-shadowsocks-with-simple-obfs ss-server -h
+docker run --name "ss-server" hitian/docker-shadowsocks-with-simple-obfs
 
 ### run server with UDP relay & obfs
 
@@ -17,7 +17,6 @@ docker run -it -v `CONFIG_JSON_DIR`:/config --name ss-client -p `LOCAL_PORT`:`LO
 
 replace `FROM ubuntu:latest` with `FROM armhf/ubuntu:latest` and build.
 
-OR 
+OR
 
 `docker pull hitian/docker-armhf-shadowsocks-with-simple-obfs`
-
