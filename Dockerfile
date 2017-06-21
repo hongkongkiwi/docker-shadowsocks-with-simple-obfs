@@ -7,13 +7,15 @@ FROM ubuntu:latest
 #For Raspberry Pi armhf
 #FROM armhf/ubuntu:latest
 
-MAINTAINER  jia <jia.tian@me.com>
+MAINTAINER Andy Savage <andy@savage.hk>
 
 ENV VERSION v3.0.6
 ENV DEPENDENCIES libtool libpcre3-dev libev-dev libudns-dev ca-certificates
 ENV BUILD_DEPENDENCIES gettext build-essential autoconf asciidoc xmlto automake git curl
 ENV LIBSODIUM_VER 1.0.12
 ENV MBEDTLS_VER 2.4.2
+
+ENV CONFIG_FILE "/config/server.json"
 
 #For amd64
 #RUN sed -i -- 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
@@ -44,4 +46,4 @@ RUN git clone https://github.com/shadowsocks/shadowsocks-libev.git  /tmp/shadows
 RUN apt-get remove -y $BUILD_DEPENDENCIES && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 
 VOLUME ["/config/"]
-CMD ["ss-server", "-h"]
+CMD ["ss-server", "-c", "$CONFIG_FILE"]
